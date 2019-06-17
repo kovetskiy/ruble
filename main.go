@@ -27,6 +27,8 @@ func main() {
 		log.Fatalln("WORD is not specified")
 	}
 
+	word = strings.ToLower(word)
+
 	api := slack.New(
 		token,
 		slack.OptionLog(
@@ -65,7 +67,7 @@ func handleMessage(
 		return nil
 	}
 
-	if strings.Contains(event.Text, word) {
+	if strings.Contains(strings.ToLower(event.Text), word) {
 		return sendChart(api, event.Channel)
 	}
 
