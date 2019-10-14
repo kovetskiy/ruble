@@ -77,7 +77,8 @@ func handleMessage(
 func sendChart(api *slack.Client, channel string) error {
 	text := "http://j1.profinance.ru/delta/prochart?type=USDRUB&" +
 		"amount=60&chart_height=220&chart_width=400&" +
-		"grtype=2&tictype=3&iId=5&seed=" + fmt.Sprint(time.Now().UnixNano())
+		"grtype=2&tictype=3&iId=5&" +
+		"seed=" + fmt.Sprint(time.Now().UnixNano()) + ".png"
 
 	_, _, err := api.PostMessage(channel, slack.MsgOptionText(text, false))
 	if err != nil {
