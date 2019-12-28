@@ -39,6 +39,8 @@ func main() {
 	rtm := api.NewRTM()
 	go rtm.ManageConnection()
 
+	log.Println("connecting to slack")
+
 	for msg := range rtm.IncomingEvents {
 		switch event := msg.Data.(type) {
 		case *slack.ConnectedEvent:
@@ -53,6 +55,8 @@ func main() {
 		case *slack.InvalidAuthEvent:
 			log.Printf("Invalid credentials")
 			return
+		default:
+			log.Println(event)
 		}
 	}
 }
